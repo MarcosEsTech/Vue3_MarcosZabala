@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue_3</title>
+</head>
+<body>
+	
+	<h1>People of Vue</h1>
+
+	<div id="app" class="container">
+		<ul class="list-group">
+			<li v-for="person in people" class="list-group-item">
+				{{person.name}}, {{person.votes}} 
+				<button @click="person.votes++">
+					Vote
+				</button>
+			</li>
+		</ul>
+
+		<h2 class="mt-2"> Our mayor is {{mayor}} </h2>
+
+	</div>
+
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.js"></script>
+
+<script>
+
+/*
+	new Vue({
+		el: '.container',
+		data: {
+		upvotes: 0
+		},
+		methods: {
+		upvote: function(){
+		// **`this`** inside methods points to the Vue instance
+		this.upvotes++;
+		}
+		}
+	});
+
+	Vue.config.keyCodes = {
+	  v: 86,
+	  f1: 112,
+	  mediaPlayPause: 179,
+	  up: [38, 87]
+	}
+
+	*/
+	
+	Vue.config.keyCodes = {
+		c: 80
+	}
+
+	new Vue({
+		el: '#app',
+		data: {
+			people: [{
+				name:'Paco',
+				votes:'0'
+			},{
+				name:'Antonio',
+				votes:'0'
+			},{
+				name:'Cristina',
+				votes:'0'
+			},{
+				name:'Sheila',
+				votes:'0'
+			},{
+				name:'Roberto',
+				votes:'0'
+			}]
+		}, 
+		methods: {
+			up:function(){
+				alert('teste')
+			}
+		},
+		computed: {
+			mayor: function(){
+				let votesMayor = 0;
+				let indexMayor;
+ 
+				for(let i=0; i<this.people.length;i++){
+					if(this.people[i].votes>votesMayor){
+						votesMayor=this.people[i].votes;
+						indexMayor=i;
+					}
+				}
+				return this.people[indexMayor].name;
+				
+			}
+		}
+	});
+
+</script>
+
+</html>
